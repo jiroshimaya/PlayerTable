@@ -52,7 +52,7 @@ const result = $("#result");
 button.click(()=>{
 	const text = textarea.val().trim();
 	if(text==""){
-		alert("歌詞を入力してください");
+		alert("歌詞を入力してください。必ず[3の倍数+1]行目(e.g. 1,4,7,10,...行目)に替え歌歌詞がくるようにしてください");
 		return;
 	}
 	const lines = text.split(/\r?\n/);
