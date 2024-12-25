@@ -1,0 +1,7 @@
+[project]
+name = "PlayerTable"
+version = "0.1.0"
+description = "やきゅうたの選手表を替え歌歌詞から作るシステム"
+readme = "../README.md"
+requires-python = ">=3.11"
+dependencies = []
