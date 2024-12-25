@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -8,19 +9,27 @@
 	<meta name="description" content="PlayerTableGenerator" />
 	<meta name="author" content="Jiro Shimaya" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
-	 <!-- jquery cdn -->
+	<!-- jquery cdn -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- jquery ui cdn -->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 	<!-- bootstrap4 cdn (jsはjqueryよりあとに読み込む)-->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 
 	<!-- fontawesome -->
 	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+	<!-- csv parser -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 
 	<!-- original scripts -->
 	<script src="js/utils.js"></script>
@@ -35,60 +44,62 @@
 			<button id="convert" class="btn btn-primary">選手表を作る</button>
 		</div>
 		<div class="row">
-			<textarea id="result" class="form-control" maxlength="10000" rows="10" placeholder="ここに結果が表示されます"></textarea>		</div>
+			<textarea id="result" class="form-control" maxlength="10000" rows="10" placeholder="ここに結果が表示されます"></textarea>
 		</div>
-		<br>
-		<div class="row">
-			<div class="col-12">
-				<div>【諸注意】</div>
-				<ul>
-					<li>作成者：<a href="https://twitter.com/shimajiroxyz">[at]shimajiroxyz</a></li>
-					<li>本プログラムはMoto(選手表ニキ)様と協力者の皆様が作成された野球選手表の情報を利用しております</li>
-					<li>プライバシーに配慮し、入出力内容のログは一切取得しておりません</li>
-					<li>利用は自己責任でお願いします</li>
-				</ul>
-				<br>
-				<div>【更新履歴】</div>
-				<ul>
-					<li>2021/03/17 選手リストに2021年度入団の選手を追加</li>
-					<li>2021/02/15 サイト公開</li>
-				</ul>
-			</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-12">
+			<div>【諸注意】</div>
+			<ul>
+				<li>作成者：<a href="https://twitter.com/shimajiroxyz">[at]shimajiroxyz</a></li>
+				<li>本プログラムはMoto(選手表ニキ)様と協力者の皆様が作成された野球選手表の情報を利用しております</li>
+				<li>プライバシーに配慮し、入出力内容のログは一切取得しておりません</li>
+				<li>利用は自己責任でお願いします</li>
+			</ul>
+			<br>
+			<div>【更新履歴】</div>
+			<ul>
+				<li>2021/03/17 選手リストに2021年度入団の選手を追加</li>
+				<li>2021/02/15 サイト公開</li>
+			</ul>
 		</div>
+	</div>
 </body>
 <script type="text/javascript">
-const textarea=$('#textarea');
-const placeholder = ["1行目：やきゅうた歌詞","2行目：オリジナル歌詞","3行目：空行"]
-textarea.attr("placeholder",placeholder.join("\n"));
-const sample_lyric = loadTextFileSync("sample/sample.txt");
-textarea.val(sample_lyric);
+	const textarea = $('#textarea');
+	const placeholder = ["1行目：やきゅうた歌詞", "2行目：オリジナル歌詞", "3行目：空行"]
+	textarea.attr("placeholder", placeholder.join("\n"));
+	const sample_lyric = loadTextFileSync("sample/sample.txt");
+	textarea.val(sample_lyric);
 
-const reference = loadJsonFileSync("reference/baseball.json");
-
-const button = $("#convert");
-const result = $("#result");
-button.click(()=>{
-	const text = textarea.val().trim();
-	if(text==""){
-		alert("歌詞を入力してください。必ず[3の倍数+1]行目(e.g. 1,4,7,10,...行目)に替え歌歌詞がくるようにしてください");
-		return;
-	}
-	const lines = text.split(/\r?\n/);
-	const table=[];
-	for(let i=0;i<lines.length;i+=3){
-		let players = lines[i].split(/\s+/);
-		for(let p of players){
-			if(p in reference){
-				const candidates = reference[p];
-				table.push(candidates.join(","));
-			}else{
-				table.push("["+p+"]に該当する選手が見つかりませんでした");
-			}
+	const reference = loadJsonFileSync("reference/baseball.json");
+	//const reference = dictlistToReferenceJson(loadCsvFileSync("reference/baseball.csv"));
+	const button = $("#convert");
+	const result = $("#result");
+	button.click(() => {
+		const text = textarea.val().trim();
+		if (text == "") {
+			alert("歌詞を入力してください。必ず[3の倍数+1]行目(e.g. 1,4,7,10,...行目)に替え歌歌詞がくるようにしてください");
+			return;
 		}
-		table.push("");
-	}
-	result.val(table.join("\n"));
-});
+		const lines = text.split(/\r?\n/);
+		const table = [];
+		for (let i = 0; i < lines.length; i += 3) {
+			let players = lines[i].split(/\s+/);
+			for (let p of players) {
+				if (p in reference) {
+					const candidates = reference[p];
+					table.push(candidates.join(","));
+				} else {
+					table.push("[" + p + "]に該当する選手が見つかりませんでした");
+				}
+			}
+			table.push("");
+		}
+		result.val(table.join("\n"));
+	});
 
 </script>
+
 </html>
